@@ -136,6 +136,7 @@ cow_f:SetScript("OnUpdate", function(self, elapsed)
 					if name then -- 152118
 						if spellId == 152118 and unitCaster == "player" then
 							buffPct = math.abs((GetTime() - expirationTime) / duration);
+							break;
 						end
 					else
 						break;
