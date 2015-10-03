@@ -130,17 +130,18 @@ cow_f:SetScript("OnUpdate", function(self, elapsed)
 		-- Update bars.
 		for index, bar in pairs(cow_bars) do
 			if bar.InUse and UnitExists(bar.Target) then
+				local buffPct = 0;
 				for buffIndex = 1, 40 do
 					local name, _, _, _, _, duration, expirationTime, unitCaster, _, _, spellId = UnitBuff(bar.Target, buffIndex);
 					if name then -- 152118
 						if spellId == 152118 and unitCaster == "player" then
-							local buffPct = math.abs((GetTime() - expirationTime) / duration);
-							cow_setBarValue(bar, buffPct);
+							buffPct = math.abs((GetTime() - expirationTime) / duration);
 						end
 					else
 						break;
 					end 
 				end
+				cow_setBarValue(bar, buffPct);
 			end
 		end
 
