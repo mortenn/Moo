@@ -82,9 +82,10 @@ function cow_hideBars()
 	end
 end
 
+local inset = 0.6875;
 function cow_setBarValue(bar, value)
 	local fill = bar.fillTexture;
-	local amount = inset + value * 0.6875;
+	local amount = inset + value * inset;
 	fill:SetHeight(max(bar:GetHeight() * amount, 1));
 	fill:SetTexCoord(0, 1, 1 - amount, 1);
 end
