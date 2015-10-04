@@ -55,6 +55,7 @@ function cow_spawnBar(target)
 		local t = frame:CreateTexture();
 		t:SetTexture("Interface\\UNITPOWERBARALT\\StoneDiamond_Vertical_Frame.blp");
 		t:SetAllPoints(frame);
+		t:SetAlpha(0.3);
 
 		f.frame = frame;
 		frame.texture = t;
@@ -84,6 +85,11 @@ end
 
 local inset = 0.6875;
 function cow_setBarValue(bar, value)
+	if value == 0 then
+		bar:SetAlpha(0.3);
+	else
+		bar:SetAlpha(0.7);
+	end
 	local fill = bar.fillTexture;
 	local amount = inset + value * inset;
 	fill:SetHeight(max(bar:GetHeight() * amount, 1));
