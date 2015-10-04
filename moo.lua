@@ -92,8 +92,9 @@ function cow_setBarValue(bar, value)
 	end
 	local fill = bar.fillTexture;
 	local amount = inset + value * inset;
-	fill:SetHeight(max(bar:GetHeight() * amount, 1));
-	fill:SetTexCoord(0, 1, 1 - amount, 1);
+	local h = bar:GetHeight();
+	fill:SetHeight(max(h - h * amount, 1));
+	fill:SetTexCoord(0, 1, amount, 1);
 end
 
 function cow_setupParty()
