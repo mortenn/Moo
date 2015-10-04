@@ -83,7 +83,6 @@ function cow_hideBars()
 	end
 end
 
-local inset = 0.6875;
 function cow_setBarValue(bar, value)
 	if value == 0 then
 		bar:SetAlpha(0.3);
@@ -91,10 +90,9 @@ function cow_setBarValue(bar, value)
 		bar:SetAlpha(0.7);
 	end
 	local fill = bar.fillTexture;
-	local amount = inset + value * inset;
-	local h = bar:GetHeight();
-	fill:SetHeight(max(h - h * amount, 1));
-	fill:SetTexCoord(0, 1, amount, 1);
+	local amount = 0.15625 + value * 0.6875;
+	fill:SetHeight(max(bar:GetHeight() * amount, 1));
+	fill:SetTexCoord(0, 1, 1 - amount, 1);
 end
 
 function cow_setupParty()
@@ -144,7 +142,7 @@ cow_f:SetScript("OnUpdate", function(self, elapsed)
 					local name, _, _, _, _, duration, expirationTime, unitCaster, _, _, spellId = UnitBuff(bar.Target, buffIndex);
 					if name then -- 152118
 						if spellId == 152118 and unitCaster == "player" then
-							buffPct = (GetTime() - expirationTime) / duration;
+							buffPct = math.abs((GetTime() - expirationTime) / duration);
 							break;
 						end
 					else
