@@ -82,10 +82,13 @@ function cow_hideBars()
 	end
 end
 
+local topInset = 20;
+local bottomInset = 20;
 function cow_setBarValue(bar, value)
 	local fill = bar.fillTexture;
-	fill:SetHeight(max(bar:GetHeight() * value, 1));
-	fill:SetTexCoord(0, 1, 1 - value, 1);
+	local amount = topInset + value * ((1 - bottomInset) - topInset);
+	fill:SetHeight(max(bar:GetHeight() * amount, 1));
+	fill:SetTexCoord(0, 1, 1 - amount, 1);
 end
 
 function cow_setupParty()
